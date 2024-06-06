@@ -1,0 +1,32 @@
+ <table class="table table-striped">
+        <thead>
+            <tr>
+                @for( dm of displayMembers; track $index){
+                    <th>
+                        {{ dm.name }}
+                    </th>
+                }
+            <tr>
+        </thead>
+        <tbody>
+            @for (row of items; track $index) {
+                <tr>
+                    @for( dm of displayMembers ; track $index){
+                        <td>
+                            @if (dm.type === 'Date'){
+                                {{ row[dm.name] | date:"MMM dd, yyyy" }}
+                            }
+                            @else{
+                                {{ row[dm.name] }}
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+            @empty {
+                <tr>
+                    <td colspan="4" style="text-align: center">No countries found</td>
+                </tr>
+            }
+        </tbody>
+ </table>

@@ -1,0 +1,19 @@
+<app-bd-table
+        [items]="items"
+        [displayMembers]="displayMembers"
+        #dyntab
+></app-bd-table>
+@if (total>0){
+    <p>Total number of comment: {{total}}</p>
+}
+@if(total> pageSize){
+    <ngb-pagination #ngbPagination
+        (pageChange)="paginationChangePage($event)"
+        [(page)]="currentPage"
+        [collectionSize]="total"
+        [maxSize]="5"
+        [pageSize]="pageSize"
+        [rotate]="true"
+        [boundaryLinks]="boundaryLinks"
+    ></ngb-pagination>
+}

@@ -1,0 +1,85 @@
+<div class="container mt-4">
+    <div class="card mb-4" style=" background-color: rgba(0,0,255,0.1);">
+        <div class="card-body d-flex align-items-center">
+            <div class="d-flex justify-content-between mb-3">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input id="my_id" type="search"
+                       class="form-control w-25 ng-valid ng-dirty active ng-touched"
+                       name="search" role="search" autocomplete="off"
+                       (change)="inputChange($event)" placeholder="Search anything..">
+                <select class="form-select w-25" name="select" (change)="SelectType($event)">
+                    @for (type of AuthorSortType | keyvalue ; track type.key){
+                    <option>
+                    {{ type.key }}
+                    </option>
+                    }
+                </select>
+
+                <button (click)=" btnForm()" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#addAuthorModal">Add New Author
+                </button>
+
+                <div class="modal fade" id="addAuthorModal" tabindex="-1" aria-labelledby="addAuthorModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div *ngIf="showForm">
+                                    <form>
+                                        <div class="modal-body">
+                                            <form (ngSubmit)="onAddAuthor()">
+                                                <div class="mb-3">
+                                                    <label for="authorName" class="form-label">Name</label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="authorName"
+                                                           name="name"
+                                                           required>
+                                                    <label for="authorImageUrl" class="form-label">Image URL</label>
+                                                    <input type="text" class="form-control"
+                                                           id="authorImageUrl"
+                                                           name="imageUrl">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Add Author</button>
+                                            </form>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <!--  <li *ngFor="let item of items">{{ item.name }}</li>-->
+        <div class="row w-100 " >
+            @for (item of items; track item.id){
+            <div class="card-group col-4 col-lg-4 d-flex   mh-100"
+             style=" height: 460px;
+             overflow: hidden;
+             overflow-y: scroll; ;">
+              <app-author [author]="item"></app-author>
+            </div>
+            }
+        </div>
+
+        @if(hasMoreItems){
+        <button   class="btn btn-primary w-full " (click)="loadData()" >Show More</button>
+        }
+
+
+        <footer>
+            <p>Author: Hege Refsnes<br>
+
+        </footer>
+
+
+    </div>
+
+
+
+</div>
+
